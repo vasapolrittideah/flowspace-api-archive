@@ -98,6 +98,10 @@ commits made untrue. A body claiming a thing was left out, when the same
 squash adds it, is a contradiction sealed into `git log` — main takes no
 direct pushes, so there is no fixing it afterwards.
 
+Wrap the description at 80 columns. GitHub copies it into the squash commit
+verbatim rather than reflowing it, so a body written as one long line per
+paragraph stays that way in `git log`, beside every commit that wraps.
+
 The pull request title is a Conventional Commit and becomes the commit on main.
 The scope is the service directory, or `repo` for repository-wide changes, and
 `!` marks a breaking contract change:
