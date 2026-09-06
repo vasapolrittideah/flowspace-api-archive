@@ -92,6 +92,12 @@ to main.
 Do not tidy branch history, and do not put reasoning in a commit body — that
 belongs in the pull request description, which survives the squash.
 
+The description is written once and then goes stale, because the branch keeps
+growing after it. Reread it before merging and correct anything the later
+commits made untrue. A body claiming a thing was left out, when the same
+squash adds it, is a contradiction sealed into `git log` — main takes no
+direct pushes, so there is no fixing it afterwards.
+
 The pull request title is a Conventional Commit and becomes the commit on main.
 The scope is the service directory, or `repo` for repository-wide changes, and
 `!` marks a breaking contract change:
