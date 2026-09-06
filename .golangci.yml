@@ -1,0 +1,54 @@
+version: "2"
+
+linters:
+  default: standard
+  enable:
+    - bodyclose
+    - depguard
+    - errorlint
+    - exhaustive
+    - gocritic
+    - godoclint
+    - godot
+    - gosec
+    - misspell
+    - nilerr
+    - noctx
+    - nolintlint
+    - protogetter
+    - rowserrcheck
+    - spancheck
+    - sqlclosecheck
+  settings:
+    depguard:
+      # ADR-0009: a service is reachable only through proto/. The compiler
+      # already enforces that for anything under internal/; this is the net for
+      # a package created outside it. One self-contained rule per service,
+      # added with the service — it denies the service's tree to every file
+      # that is not in it, which also covers pkg/ and makes the rule below
+      # redundant once the first service lands:
+      #
+      #   identity-is-private:
+      #     files: ["**", "!**/services/identity/**"]
+      #     deny:
+      #       - pkg: github.com/vasapolrittideah/flowspace-api/services/identity
+      #         desc: reachable only through proto/ (ADR-0009)
+      rules:
+        pkg-is-infrastructure-only:
+          files: ["**/pkg/**"]
+          deny:
+            - pkg: github.com/vasapolrittideah/flowspace-api/services
+              desc: pkg/ holds infrastructure, never domain types (ADR-0009)
+    nolintlint:
+      # A bare //nolint hides an unknown linter for an unstated reason.
+      require-explanation: true
+      require-specific: true
+
+formatters:
+  enable:
+    - gofmt
+    - goimports
+  settings:
+    goimports:
+      local-prefixes:
+        - github.com/vasapolrittideah/flowspace-api
