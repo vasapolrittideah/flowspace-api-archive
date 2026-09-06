@@ -8,10 +8,11 @@ linters:
     - errorlint
     - exhaustive
     - gocritic
+    - godoclint
+    - godot
     - gosec
     - misspell
     - nilerr
-    - nilnesserr
     - noctx
     - nolintlint
     - protogetter
